@@ -27,9 +27,10 @@ public class JSoupControllerTest {
     @Test
     public void Crawl_Test() throws Exception {
         String url = "http://localhost:"+port+"/api/v1/crawl";
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, "20211226",String.class);
-        responseEntity = restTemplate.postForEntity(url, "20211227",String.class);
-        responseEntity = restTemplate.postForEntity(url, "20211228",String.class);
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, "20211229",String.class);
+        System.out.println(url+"\n\n\n\n\n\n\ndsfsdfasfdsafdsafsf");
+        responseEntity = restTemplate.postForEntity(url, "20211230",String.class);
+        responseEntity = restTemplate.postForEntity(url, "20211231",String.class);
 
 
 
