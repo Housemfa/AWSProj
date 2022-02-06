@@ -24,8 +24,32 @@ public class OAuthAttributes {
     }
 
     public static OAuthAttributes of(String registrationId, String usernameAttributeName, Map<String, Object> attributes){
-        return ofGoogle(usernameAttributeName, attributes);
+        OAuthAttributes oAuthAttributes = null;
+        switch(registrationId){
+            case "naver":
+                oAuthAttributes = ofNaver("id", attributes);
+                break;
+            case "google":
+                oAuthAttributes = ofGoogle(usernameAttributeName, attributes);
+                break;
+            //default:
+            //    oAuthAttributes = ofGoogle(usernameAttributeName, attributes);
+            //    break;
+        }
+        return oAuthAttributes;
     }
+
+    private static OAuthAttributes ofNaver(String usernameAttributeName, Map<String, Object> attributes) {
+        Map<String, Object> response = (Map<String, Object>) attributes.get("response");
+        return OAuthAttributes.builder()
+                .name((String)response.get("name"))
+                .email((String)response.get("email"))
+                .picture((String)response.get("profile_image"))
+                .attributes(response)
+                .nameAttributeKey(usernameAttributeName)
+                .build();
+    }
+
     public static OAuthAttributes ofGoogle(String usernameAttributeName, Map<String, Object> attributes){
         return OAuthAttributes.builder()
                 .name((String)attributes.get("name"))

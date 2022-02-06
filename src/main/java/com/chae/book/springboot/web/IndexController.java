@@ -1,5 +1,6 @@
 package com.chae.book.springboot.web;
 
+import com.chae.book.springboot.config.auth.LoginUser;
 import com.chae.book.springboot.config.auth.dto.SessionUser;
 import com.chae.book.springboot.service.posts.PostsService;
 import com.chae.book.springboot.web.dto.PostsResponseDto;
@@ -18,12 +19,10 @@ public class IndexController {
     private final PostsService postsService;
     private final HttpSession httpSession;
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAllDesc());
-        SessionUser user = (SessionUser)httpSession.getAttribute("user");
         if(null != user){
             model.addAttribute("loggedInUserName",user.getName());
-            
         }
         return "index";
     }
