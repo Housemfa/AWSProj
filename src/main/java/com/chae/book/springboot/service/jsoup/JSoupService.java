@@ -41,6 +41,9 @@ public class JSoupService {
             }
             Element table = doc.select("table").get(0);
             Elements rows = table.select("tr.success");
+            if(query.contains("nhdtb")){
+                rows.addAll(table.select("tr.default"));
+            }
             for (int i = 0; i < rows.size(); i++) {
                 Element row = rows.get(i);
 

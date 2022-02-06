@@ -23,6 +23,7 @@ public class IndexController {
         SessionUser user = (SessionUser)httpSession.getAttribute("user");
         if(null != user){
             model.addAttribute("loggedInUserName",user.getName());
+            
         }
         return "index";
     }
