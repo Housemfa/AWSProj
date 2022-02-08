@@ -45,9 +45,9 @@ public class JSoupControllerTest {
 
         //2021-11-11 15:48	~2021-09-09 16:38	(596~574)
 
-        LocalDate startDt = LocalDate.of(2022,1,30);
+        LocalDate startDt = LocalDate.of(2022,1,31);
 
-        LocalDate endDt = LocalDate.of(2022,1,24);
+        LocalDate endDt = LocalDate.of(2022,1,31);
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMdd");
         String startDtFormat;
         String endDtFormat;
@@ -55,7 +55,7 @@ public class JSoupControllerTest {
             startDtFormat = startDt.format(formatter2);
             endDtFormat = endDt.format(formatter2);
             System.out.println(startDtFormat+" / "+endDtFormat);
-            responseEntity = restTemplate.postForEntity(url, startDtFormat,String.class);
+            //responseEntity = restTemplate.postForEntity(url, startDtFormat,String.class);
             startDt = startDt.minusDays(1);
         }while(Integer.valueOf(startDtFormat)>=Integer.valueOf(endDtFormat));
 
