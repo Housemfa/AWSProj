@@ -40,4 +40,5 @@ dependencies {
     implementation group: 'com.google.code.gson', name: 'gson', version: '2.7'
     compile('org.springframework.session:spring-session-jdbc')
     testCompile('org.springframework.security:spring-security-test')
+    compile('org.mariadb.jdbc:mariadb-java-client')
 }
