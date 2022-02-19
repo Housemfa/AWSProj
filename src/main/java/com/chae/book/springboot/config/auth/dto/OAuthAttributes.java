@@ -14,6 +14,8 @@ public class OAuthAttributes {
     private final String email;
     private final String picture;
 
+    private static final String nameAttributeKeyStatic = "id";
+
     @Builder
     public OAuthAttributes(Map<String, Object> attributes, String nameAttributeKey,String name, String email, String picture){
         this.attributes = attributes;
@@ -27,7 +29,7 @@ public class OAuthAttributes {
         OAuthAttributes oAuthAttributes = null;
         switch(registrationId){
             case "naver":
-                oAuthAttributes = ofNaver("id", attributes);
+                oAuthAttributes = ofNaver(attributes);
                 break;
             case "google":
                 oAuthAttributes = ofGoogle(usernameAttributeName, attributes);
@@ -35,15 +37,16 @@ public class OAuthAttributes {
         }
         return oAuthAttributes;
     }
-
-    private static OAuthAttributes ofNaver(String usernameAttributeName, Map<String, Object> attributes) {
+    //todo: find some way to remove this suppress warning
+    @SuppressWarnings("unchecked")
+    private static OAuthAttributes ofNaver(Map<String, Object> attributes) {
         Map<String, Object> response = (Map<String, Object>) attributes.get("response");
         return OAuthAttributes.builder()
                 .name((String)response.get("name"))
                 .email((String)response.get("email"))
                 .picture((String)response.get("profile_image"))
                 .attributes(response)
-                .nameAttributeKey(usernameAttributeName)
+                .nameAttributeKey(nameAttributeKeyStatic)
                 .build();
     }
 
