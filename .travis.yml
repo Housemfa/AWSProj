@@ -15,6 +15,20 @@ script: "./gradlew clean build"
 
 before_install:
   - chmod +x gradlew
+  - zip -r AWSProj *
+  - mkdir -p deploy
+  - mv AWSProj.zip deploy/AWSProj.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: chae-springboot-aws-proj-build
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private
+    local_dir: deploy
+    wait-until-deployed: true
 
 #CI 실행 완료시 메일로 알림
 notification:
