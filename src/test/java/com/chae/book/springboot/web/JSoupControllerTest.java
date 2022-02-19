@@ -30,24 +30,11 @@ public class JSoupControllerTest {
     public void Crawl_Test() throws Exception {
         String url = "http://localhost:"+port+"/api/v1/crawl";
         ResponseEntity<String> responseEntity;
-        //ResponseEntity<String> responseEntity = restTemplate.postForEntity(url, "20220111",String.class);
-        //responseEntity = restTemplate.postForEntity(url, "20220110",String.class);
-//        responseEntity = restTemplate.postForEntity(url, "20220109",String.class);
-//        responseEntity = restTemplate.postForEntity(url, "20220108",String.class);
-//        responseEntity = restTemplate.postForEntity(url, "20220107",String.class);
-//        responseEntity = restTemplate.postForEntity(url, "20220106",String.class);
-//
-//        responseEntity = restTemplate.postForEntity(url, "20220105",String.class);
-//        responseEntity = restTemplate.postForEntity(url, "20220104",String.class);
-//        responseEntity = restTemplate.postForEntity(url, "20220103",String.class);
-//        responseEntity = restTemplate.postForEntity(url, "20220102",String.class);
-//        responseEntity = restTemplate.postForEntity(url, "20220101",String.class);
-
         //2021-11-11 15:48	~2021-09-09 16:38	(596~574)
 
-        LocalDate startDt = LocalDate.of(2022,1,31);
+        LocalDate startDt = LocalDate.of(2022,2,15);
 
-        LocalDate endDt = LocalDate.of(2022,1,31);
+        LocalDate endDt = LocalDate.of(2022,2,3);
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyyMMdd");
         String startDtFormat;
         String endDtFormat;
@@ -55,9 +42,9 @@ public class JSoupControllerTest {
             startDtFormat = startDt.format(formatter2);
             endDtFormat = endDt.format(formatter2);
             System.out.println(startDtFormat+" / "+endDtFormat);
-            //responseEntity = restTemplate.postForEntity(url, startDtFormat,String.class);
+            responseEntity = restTemplate.postForEntity(url, startDtFormat,String.class);
             startDt = startDt.minusDays(1);
-        }while(Integer.valueOf(startDtFormat)>=Integer.valueOf(endDtFormat));
+        }while(Integer.parseInt(startDtFormat)>=Integer.parseInt(endDtFormat));
 
     }
     @Test
