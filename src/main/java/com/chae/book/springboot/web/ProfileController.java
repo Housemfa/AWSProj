@@ -18,13 +18,13 @@ public class ProfileController {
     public String profile(){
         List<String> profiles = Arrays.asList(env.getActiveProfiles());
         List<String> realProfiles = Arrays.asList("real","real1","real2");
-        //List<String> defaultProfiles = Arrays.asList(env.getDefaultProfiles());
-        String defaultProfile = profiles.isEmpty()? "default" : profiles.get(0);
+        List<String> defaultProfiles = Arrays.asList(env.getDefaultProfiles());
+        //String defaultProfile = profiles.isEmpty()? "default" : profiles.get(0);
 
         return profiles.stream()
                 .filter(realProfiles::contains)
                 .findAny()
-                //.orElse(defaultProfiles.get(0));
-                .orElse(defaultProfile);
+                .orElse(defaultProfiles.get(0));
+                //.orElse(defaultProfile);
     }
 }
